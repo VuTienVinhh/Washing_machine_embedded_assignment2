@@ -1,0 +1,45 @@
+\section{Problem and Requirements}
+The project controls a washing machine with coins, three buttons and two LEDs.
+A customer pays at least 50 cents and presses RUN to start a 30 minute cycle.
+PAUSE stops washing while the timer continues. RUN resumes the same cycle.
+The controller returns to standby after the time ends or after two STOP presses.
+These rules come from the assignment sheet~\cite{brief}.
+
+The implementation covers the control unit. Washing is represented by a digital
+enable signal. Water valves, drum speed and wash stages are outside the given task.
+
+\subsection{Required Behavior}
+\begin{tabularx}{\linewidth}{@{}p{0.85cm}Y@{}}
+\toprule
+ID & Requirement\\
+\midrule
+R1 & Use STOP, RUN and PAUSE as the three machine controls.\\
+R2 & Accept only 10, 20 and 50 cent coins. Add their values to the credit.\\
+R3 & Keep RLED on in standby. Make RLED blink when an error occurs.\\
+R4 & Turn BLED on when credit reaches at least 50 cents.\\
+R5 & Start only after enough credit and a RUN press. Clear all credit, including surplus.\\
+R6 & Start a 30 minute timer on the first RUN. Make BLED blink while washing.\\
+R7 & On PAUSE, stop washing but keep the timer counting. RUN resumes without restarting it.\\
+R8 & End at 30 minutes, including paused time, or after two separate STOP presses.\\
+\bottomrule
+\end{tabularx}
+
+\subsection{Choices for Details Not Given in the Brief}
+\begin{tabularx}{\linewidth}{@{}p{3.15cm}Y@{}}
+\toprule
+Detail & Choice used in this project\\
+\midrule
+Ready indication & Ready is still available before a cycle, so RLED stays on and BLED is on.\\
+Paused indication & RLED is off, BLED stays on and the wash output is off.\\
+Two STOP presses & Count two separate press events in one active cycle. No time window is imposed. PAUSE and RUN keep the count.\\
+Active cycle coins & Ignore coins in Running, Paused and Error. The coin input is a bench emulator of a validated acceptor.\\
+Error and recovery & A test fault signal enters Error. Washing stops and credit clears. Clear the fault and reset the board to recover.\\
+Blink and buttons & Use a 1 second blink period and 30 ms button debounce. A held button gives one event.\\
+\bottomrule
+\end{tabularx}
+
+\subsection{Scope of the Submitted Evidence}
+The package includes working controller logic, a browser simulation and automated
+software tests. It also includes a board sketch and a wiring plan. Physical board
+operation has not been measured. The supplied brief does not specify a board or
+a required photograph; any separate lab instruction must be checked before submission.

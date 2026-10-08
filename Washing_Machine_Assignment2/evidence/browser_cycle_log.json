@@ -1,0 +1,122 @@
+[
+  {
+    "state": "STANDBY",
+    "credit": 0,
+    "remaining": 0,
+    "stops": 0,
+    "red": true,
+    "blue": false,
+    "wash": false,
+    "now": 0,
+    "input": "RESET",
+    "remainingText": "--:--"
+  },
+  {
+    "state": "STANDBY",
+    "credit": 0,
+    "remaining": 0,
+    "stops": 0,
+    "red": true,
+    "blue": false,
+    "wash": false,
+    "now": 0,
+    "input": "RUN",
+    "remainingText": "--:--"
+  },
+  {
+    "state": "STANDBY",
+    "credit": 20,
+    "remaining": 0,
+    "stops": 0,
+    "red": true,
+    "blue": false,
+    "wash": false,
+    "now": 0,
+    "input": "COIN 20 c",
+    "remainingText": "--:--"
+  },
+  {
+    "state": "READY",
+    "credit": 70,
+    "remaining": 0,
+    "stops": 0,
+    "red": true,
+    "blue": true,
+    "wash": false,
+    "now": 0,
+    "input": "COIN 50 c",
+    "remainingText": "--:--"
+  },
+  {
+    "state": "RUNNING",
+    "credit": 0,
+    "remaining": 1800000,
+    "stops": 0,
+    "red": false,
+    "blue": true,
+    "wash": true,
+    "now": 0,
+    "input": "RUN",
+    "remainingText": "30:00"
+  },
+  {
+    "state": "RUNNING",
+    "credit": 0,
+    "remaining": 1320000,
+    "stops": 0,
+    "red": false,
+    "blue": true,
+    "wash": true,
+    "now": 480000,
+    "input": "ADVANCE 08:00",
+    "remainingText": "22:00"
+  },
+  {
+    "state": "PAUSED",
+    "credit": 0,
+    "remaining": 1320000,
+    "stops": 0,
+    "red": false,
+    "blue": true,
+    "wash": false,
+    "now": 480000,
+    "input": "PAUSE",
+    "remainingText": "22:00"
+  },
+  {
+    "state": "PAUSED",
+    "credit": 0,
+    "remaining": 840000,
+    "stops": 0,
+    "red": false,
+    "blue": true,
+    "wash": false,
+    "now": 960000,
+    "input": "ADVANCE 08:00",
+    "remainingText": "14:00"
+  },
+  {
+    "state": "RUNNING",
+    "credit": 0,
+    "remaining": 840000,
+    "stops": 0,
+    "red": false,
+    "blue": true,
+    "wash": true,
+    "now": 960000,
+    "input": "RUN",
+    "remainingText": "14:00"
+  },
+  {
+    "state": "STANDBY",
+    "credit": 0,
+    "remaining": 0,
+    "stops": 0,
+    "red": true,
+    "blue": false,
+    "wash": false,
+    "now": 1800000,
+    "input": "ADVANCE 14:00",
+    "remainingText": "--:--"
+  }
+]

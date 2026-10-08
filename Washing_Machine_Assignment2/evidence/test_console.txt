@@ -1,0 +1,28 @@
+PASS T01: Standby LEDs
+PASS T02: RUN with less than 50 cents
+PASS T03: Accumulate 20 + 20 + 10 cents
+PASS T04: One 50 cent coin
+PASS T05: Discard surplus when starting
+PASS T06: Reject unsupported 25 cent coin
+PASS T07: Ignore coins during active cycle
+PASS T08: Blue LED blinks every 500 ms
+PASS T09: PAUSE keeps timer counting
+PASS T10: Resume retains original deadline
+PASS T11: Running cycle ends exactly at 30 min
+PASS T12: Paused cycle also ends at 30 min
+PASS T13: Two STOP presses force stop
+PASS T14: Two STOP presses while paused
+PASS T15: STOP count survives pause and resume
+PASS T16: New cycle clears STOP count
+PASS T17: Fault stops washing and blinks red
+PASS T18: Error is latched until board reset
+PASS T19: Repeated RUN cannot restart timer
+PASS T20: Unsigned timer survives clock rollover
+PASS T21: Fault has priority over commands
+PASS T22: Timeout has priority over resume
+PASS T23: PAUSE has priority over RUN
+PASS T24: STOP has priority over PAUSE
+PASS T25: Unused buttons in standby do nothing
+PASS: 13 debounce checks (bounce, hold, release, rollover)
+PASS: 15 firmware adapter checks using mocked Arduino IO
+PASS: 25 scenarios, 145 expected-field assertions, 5001 matching C++/JS trace steps.

@@ -1,0 +1,18 @@
+\subsection{Simulation Evidence}
+These images are captured from the local software simulator. They show the
+control behavior, not a photograph of an assembled machine.
+
+\fig{03_running_panel.png}{1.0}{Running after payment of 70 cents. Credit is cleared and the cycle starts at 30:00.}
+\fig{04_paused_panel.png}{1.0}{Paused at minute 8. Washing is off and 22:00 remains on the same timer.}
+
+The stored demonstration continues to minute 16 and resumes with 14:00 left.
+At minute 30, the state returns to Standby. Separate captures show the first
+STOP press, force stop after the second press, and the Error state.
+The saved event log is \code{evidence/browser\_cycle\_log.json}.
+
+\subsection{What Still Needs a Physical Check}
+The physical circuit has not been assembled or tested in this work. If a board
+demonstration is required, upload the compiled sketch and check the LEDs,
+controls and timeout. Record the board and Serial Monitor
+together. The software tests do not measure real switch bounce, wiring quality,
+coin acceptor signals or a motor driver.

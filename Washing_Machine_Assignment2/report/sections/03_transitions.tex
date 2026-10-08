@@ -1,0 +1,45 @@
+\subsection{Transition Rules}
+{\small\renewcommand{\arraystretch}{1.09}
+\begin{tabularx}{\linewidth}{@{}p{2.65cm}p{4.25cm}Y@{}}
+\toprule
+Current state & Event or condition & Result\\
+\midrule
+Standby & Valid coin; credit below 50 & Add credit; stay in Standby.\\
+Standby & Valid coin; credit reaches 50 & Add credit; enter Ready.\\
+Ready & Valid coin & Add credit; stay in Ready.\\
+Ready & RUN & Clear credit, save start time and enter Running.\\
+Running & PAUSE & Turn washing off; enter Paused. Keep start time.\\
+Paused & RUN & Turn washing on; enter Running. Keep start time.\\
+Running or Paused & First STOP & Set STOP count to 1. Keep the current state.\\
+Running or Paused & Second STOP & Clear cycle data; enter Standby.\\
+Running or Paused & Elapsed time reaches 30 min & Clear cycle data; enter Standby.\\
+Any normal state & Fault signal & Turn washing off, clear credit and enter Error.\\
+Error & Board reset after fault is cleared & Return to Standby with zero credit.\\
+\bottomrule
+\end{tabularx}}
+Unsupported coins do not add credit. Other unused controls leave the state unchanged.
+RUN in Running does not restart the timer.
+
+\subsection{Timer and Pause Behavior}
+The timer uses elapsed time from the first RUN:
+\[
+T_{\mathrm{cycle}}=30\times60\times1000=1{,}800{,}000\ \mathrm{ms},\qquad
+T_{\mathrm{left}}=\max(0,T_{\mathrm{cycle}}-(t-t_{\mathrm{start}})).
+\]
+The start time changes only when a paid cycle starts. For example, pause at
+minute 8 and resume at minute 16. There are 14 minutes left after resuming, and
+the cycle still ends at minute 30.
+\fig{04_pause_timeline.pdf}{1.0}{Example cycle with eight minutes spent in Paused.}
+
+\subsection{Work in Each Loop}
+\begin{enumerate}
+\item Read the inputs and create debounced press events.
+\item Check the fault signal. A fault has the highest priority.
+\item Check the deadline in both Running and Paused.
+\item Collect valid coins before a cycle, or process STOP, PAUSE and RUN during a cycle.
+\item Update the LEDs and wash output from the current state.
+\item Write a short trace when the state, credit or STOP count changes.
+\end{enumerate}
+In an active cycle, STOP is processed before the other buttons. PAUSE takes
+priority over RUN when the machine is Running. An expired cycle ignores input
+events from that same loop. The loop uses no blocking wait.

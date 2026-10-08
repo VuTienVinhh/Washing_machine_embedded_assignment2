@@ -1,0 +1,58 @@
+\section{Verification and Results}
+\subsection{Software Tests}
+Tests run the C++ controller with a virtual millisecond clock. Each scenario
+checks expected states, credit, remaining time or outputs. No real 30 minute
+wait is needed: the tests supply time values directly. These results verify
+logic, not the accuracy of a physical board clock.
+
+\begin{tabularx}{\linewidth}{@{}p{5.4cm}Y@{}}
+\toprule
+Check & Measured result\\
+\midrule
+Required behavior and edge cases & 25 scenarios passed; 145 expected fields checked.\\
+Button handling & 13 checks passed for bounce, held presses, release and rollover.\\
+Sketch adapter on computer & 15 checks passed with mocked Arduino inputs and outputs.\\
+Browser model against C++ & All 5,001 steps matched in a seeded exploratory trace.\\
+UNO R3 target build & Compiled with Arduino AVR Boards 1.8.6; 3,838 bytes of flash and 302 bytes of static RAM.\\
+Browser controls & Coins, buttons, clock and fault controls passed; 10 captures saved.\\
+\bottomrule
+\end{tabularx}
+
+\vspace{4pt}
+{\small
+\begin{tabularx}{\linewidth}{@{}p{0.95cm}Yp{1.4cm}@{}}
+\toprule
+Test & Behavior checked & Result\\
+\midrule
+T01 & Standby LEDs and disabled wash output. & Pass\\
+T02 & RUN ignored with only 30 cents. & Pass\\
+T03 & 20 + 20 + 10 cents enters Ready. & Pass\\
+T04 & One 50 cent coin enters Ready. & Pass\\
+T05 & 70 cents becomes zero when washing starts. & Pass\\
+T06 & A 25 cent input is rejected. & Pass\\
+T07 & Coins ignored in Running and Paused. & Pass\\
+T08 & BLED changes every 500 ms while Running. & Pass\\
+T09 & Time decreases while Paused. & Pass\\
+T10 & Resume keeps the original deadline. & Pass\\
+T11 & Running ends exactly at the 30 minute boundary. & Pass\\
+T12 & Paused also ends at the 30 minute boundary. & Pass\\
+T13 & First STOP keeps Running; second STOP ends it. & Pass\\
+T14 & Two STOP presses also work in Paused. & Pass\\
+T15 & STOP count survives pause and resume. & Pass\\
+T16 & A new cycle clears the old STOP count. & Pass\\
+T17 & Fault disables washing and makes RLED blink. & Pass\\
+T18 & Error stays latched until reset. & Pass\\
+T19 & Repeated RUN cannot restart the timer. & Pass\\
+T20 & Cycle timing works across unsigned clock rollover. & Pass\\
+T21 & Fault takes priority over control commands. & Pass\\
+T22 & Timeout takes priority over resume. & Pass\\
+T23 & PAUSE takes priority over RUN while Running. & Pass\\
+T24 & STOP takes priority over PAUSE. & Pass\\
+T25 & Unused controls do not change Standby. & Pass\\
+\bottomrule
+\end{tabularx}}
+
+\vspace{3pt}
+Run \code{python3 tests/test\_controller.py} from the project folder.
+It needs Python 3, a C++ compiler named \code{g++}, and Node.js.
+The \code{evidence/} folder contains the console output, result table and traces.

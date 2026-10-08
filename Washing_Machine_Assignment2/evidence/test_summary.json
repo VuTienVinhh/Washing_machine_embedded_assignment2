@@ -1,0 +1,10 @@
+{
+  "scenario_count": 25,
+  "expected_field_assertions": 145,
+  "cpp_js_matching_trace_steps": 5001,
+  "debounce_checks": 13,
+  "firmware_adapter_checks": 15,
+  "status": "PASS",
+  "seed": 2353334,
+  "scope": "Host C++ controller and JavaScript model; no physical board test."
+}

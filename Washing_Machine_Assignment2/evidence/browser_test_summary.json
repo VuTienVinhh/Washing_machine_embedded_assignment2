@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "screenshots": 10,
+  "standalone_html": "PASS",
+  "controls": "Coins, RUN, PAUSE, STOP, fault, reset, auto clock",
+  "scope": "Real local browser interactions; no physical board."
+}

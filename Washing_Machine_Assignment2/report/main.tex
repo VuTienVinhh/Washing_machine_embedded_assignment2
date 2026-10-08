@@ -1,0 +1,30 @@
+\documentclass[11pt,a4paper]{article}
+\input{config/preamble}
+\input{config/team}
+\begin{document}
+\input{sections/00_cover}
+\pagenumbering{roman}
+\tableofcontents
+\thispagestyle{plain}
+\vfill
+\noindent\textbf{Project files.} The source package contains the report, controller code,
+an offline browser simulator, diagrams and test results. The report presents a
+software implementation and a proposed board connection.
+\clearpage
+\pagenumbering{arabic}
+\input{sections/01_requirements}
+\clearpage
+\input{sections/02_design}
+\clearpage
+\input{sections/03_transitions}
+\clearpage
+\input{sections/04_hardware}
+\clearpage
+\input{sections/05_software}
+\clearpage
+\input{sections/06_tests}
+\clearpage
+\input{sections/07_evidence}
+\clearpage
+\input{sections/08_team_references}
+\end{document}

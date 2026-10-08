@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "report_pages": 10,
+  "report_layout": "All 10 pages rendered and visually reviewed. Names and IDs checked.",
+  "native_tests": {
+    "scenario_count": 25,
+    "expected_field_assertions": 145,
+    "cpp_js_matching_trace_steps": 5001,
+    "debounce_checks": 13,
+    "firmware_adapter_checks": 15,
+    "status": "PASS",
+    "seed": 2353334,
+    "scope": "Host C++ controller and JavaScript model; no physical board test."
+  },
+  "browser_tests": {
+    "status": "PASS",
+    "screenshots": 10,
+    "standalone_html": "PASS",
+    "controls": "Coins, RUN, PAUSE, STOP, fault, reset, auto clock",
+    "scope": "Real local browser interactions; no physical board."
+  },
+  "target_build": {
+    "status": "PASS",
+    "target": "arduino:avr:uno",
+    "core": "Arduino AVR Boards 1.8.6",
+    "cli": "1.5.2-rc.1",
+    "scope": "Target compile only. No board upload or physical test."
+  },
+  "physical_hardware": "Not tested"
+}

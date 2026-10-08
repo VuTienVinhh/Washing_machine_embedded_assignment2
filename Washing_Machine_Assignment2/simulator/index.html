@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Assignment 2 | Washing Machine Controller</title>
+  <style>
+    :root{--ink:#183048;--muted:#587086;--blue:#2563a6;--line:#d9e3ec;--paper:#fff;--bg:#edf2f7}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px Arial,sans-serif}
+    main{max-width:1140px;margin:28px auto;padding:0 24px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+    .eyebrow{font-size:12px;letter-spacing:1.7px;font-weight:bold;color:var(--blue)}h1{font-size:28px;margin:8px 0}h2{font-size:16px;margin:0 0 16px}
+    p{line-height:1.5;margin:6px 0;color:var(--muted)}.tag{font-size:12px;background:#dfeafa;color:var(--blue);border-radius:20px;padding:9px 14px}
+    .grid{display:grid;grid-template-columns:1.14fr 1fr;gap:20px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px}
+    .state-row{display:flex;justify-content:space-between;align-items:center;padding-bottom:22px;border-bottom:1px solid var(--line)}
+    #state{font-weight:bold;font-size:24px;color:var(--blue)}.label{font-size:12px;color:var(--muted);margin-bottom:7px}
+    .metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:22px 0}.metric strong{display:block;font-size:25px;font-weight:500;font-variant-numeric:tabular-nums}
+    .leds{display:flex;gap:24px;padding:18px;background:#f5f8fb;border-radius:10px}.led-item{display:flex;align-items:center;gap:11px;flex:1;font-size:12px;line-height:1.6}
+    .lamp{height:21px;width:21px;border-radius:50%;background:#cbd5df;border:2px solid #b4c2cf;flex-shrink:0}.lamp.red.on{background:#d94a4a;border-color:#be3333;box-shadow:0 0 0 5px #f9e2e2}.lamp.blue.on{background:#3389d1;border-color:#2572b6;box-shadow:0 0 0 5px #e1effb}
+    .wash{margin:18px 0 0;display:flex;align-items:center;gap:10px}.dot{width:8px;height:8px;border-radius:50%;background:#9babb9}.dot.active{background:#2d916e}
+    button,select{font:inherit;border:1px solid #c5d4e1;border-radius:8px;background:#fff;color:var(--ink);padding:11px 14px;cursor:pointer}button:hover{background:#eef4fa}button:focus-visible,select:focus-visible{outline:3px solid #78aae0;outline-offset:2px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:19px}.row button{flex:1}.primary{background:var(--blue);color:#fff;border-color:var(--blue)}.primary:hover{background:#1d518e}.stop{color:#b64040;border-color:#e4bcbc}.small{font-size:12px}.divider{border-top:1px solid var(--line);padding-top:17px}.clock{display:flex;justify-content:space-between;align-items:center;margin:15px 0}.clock strong{font-variant-numeric:tabular-nums}select{padding:8px;font-size:13px}
+    .notice{font-size:12px;border-left:3px solid #7aa6d1;padding:8px 12px;background:#f0f6fc;line-height:1.6}.logs{margin-top:20px}.loghead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.loghead h2{margin:0}.loghead button{font-size:12px;padding:7px 11px}table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}th{font-size:11px;text-transform:uppercase;color:var(--muted);font-weight:normal;background:#f5f8fb}td,th{padding:10px 12px;border-bottom:1px solid #e7edf3}tr:last-child td{border-bottom:0}.mono{font-family:Consolas,monospace}footer{font-size:11px;color:var(--muted);margin:16px 0 26px;text-align:center}
+    @media(max-width:780px){.grid{grid-template-columns:1fr}main{margin:18px auto;padding:0 14px}header{display:block}.tag{display:inline-block;margin-top:6px}h1{font-size:24px}.panel{padding:19px}.logs{overflow:auto}.metrics{gap:6px}.metric strong{font-size:22px}}
+  </style>
+</head>
+<body>
+<main>
+  <header><div><div class="eyebrow">CO3053 / ASSIGNMENT 2</div><h1>Washing Machine Controller</h1><p>Insert at least 50 cents, then press RUN.</p></div><span class="tag">Software simulation</span></header>
+  <div class="grid">
+    <section class="panel" aria-label="Machine status">
+      <div class="state-row"><div><div class="label">CURRENT STATE</div><div id="state">STANDBY</div></div><div><div class="label">STOP PRESSES</div><strong id="stops">0 / 2</strong></div></div>
+      <div class="metrics"><div class="metric"><div class="label">CREDIT</div><strong id="credit">0 c</strong></div><div class="metric"><div class="label">TIME LEFT</div><strong id="remaining">--:--</strong></div><div class="metric"><div class="label">CYCLE LIMIT</div><strong>30:00</strong></div></div>
+      <div class="leds"><div class="led-item"><span id="red" class="lamp red on"></span><div><b>Red LED</b><br><span id="redMode">ON</span></div></div><div class="led-item"><span id="blue" class="lamp blue"></span><div><b>Blue LED</b><br><span id="blueMode">OFF</span></div></div></div>
+      <div class="wash"><span id="washDot" class="dot"></span><span id="wash">Wash output OFF</span></div>
+      <div class="clock"><span>Virtual clock <strong id="clock">00:00</strong></span><select id="speed" aria-label="Automatic clock speed"><option value="0">Manual time</option><option value="1">Real time (1x)</option><option value="60">Demo time (60x)</option></select></div>
+      <div class="row"><button data-advance="60000">+1 minute</button><button data-advance="300000">+5 minutes</button><button data-advance="1800000">+30 minutes</button></div>
+      <div class="notice">PAUSE stops washing, but time keeps counting. RUN resumes the same cycle. Two separate STOP presses end the cycle.</div>
+    </section>
+    <section class="panel" aria-label="Machine controls">
+      <h2>Coin input</h2><div class="row"><button data-coin="10">10 cents</button><button data-coin="20">20 cents</button><button data-coin="50">50 cents</button></div><p class="small">Coins are accepted in STANDBY and READY. Starting clears all credit, including any surplus.</p>
+      <h2 style="margin-top:25px">Machine buttons</h2><div class="row"><button class="primary" data-action="RUN">RUN</button><button data-action="PAUSE">PAUSE</button><button class="stop" data-action="STOP">STOP</button></div><p class="small">One STOP press records 1 / 2. There is no double press time limit in this implementation.</p>
+      <div class="divider" style="margin-top:22px"><h2>Test tools</h2><div class="row"><button id="fault" class="small">Inject fault</button><button id="reset" class="small">Reset bench</button></div><p class="small">A fault turns washing off and makes the red LED blink. Reset bench models the board reset button.</p></div>
+    </section>
+  </div>
+  <section class="panel logs"><div class="loghead"><h2>Event log</h2><button id="download">Download log</button></div><table><thead><tr><th>Time</th><th>Input</th><th>State</th><th>Credit</th><th>Time left</th><th>Wash</th></tr></thead><tbody id="log"></tbody></table></section>
+  <footer>Controller logic is tested against the C++ implementation. This screen is simulation evidence.</footer>
+</main>
+<script src="controller.js"></script>
+<script>
+  const m = new Washing.Controller();
+  let now = 0, speed = 0, records = [], lastWall = performance.now();
+  const $ = id => document.getElementById(id);
+  const mmss = ms => { const s = Math.ceil(ms / 1000); return String(Math.floor(s / 60)).padStart(2,'0') + ':' + String(s % 60).padStart(2,'0'); };
+  function render() {
+    const s = m.snapshot(now >>> 0);
+    $('state').textContent = s.state; $('credit').textContent = s.credit + ' c';
+    $('stops').textContent = s.stops + ' / 2'; $('clock').textContent = mmss(now);
+    $('remaining').textContent = m.active() ? mmss(s.remaining) : '--:--';
+    $('red').classList.toggle('on', s.red); $('blue').classList.toggle('on', s.blue);
+    $('redMode').textContent = s.state === 'ERROR' ? 'BLINK (1 s)' : s.red ? 'ON' : 'OFF';
+    $('blueMode').textContent = s.state === 'RUNNING' ? 'BLINK (1 s)' : s.blue ? 'ON' : 'OFF';
+    $('washDot').classList.toggle('active', s.wash); $('wash').textContent = 'Wash output ' + (s.wash ? 'ON' : 'OFF');
+    $('log').replaceChildren();
+    for (const r of records.slice(-7).reverse()) {
+      const tr = document.createElement('tr');
+      for (const v of [mmss(r.now), r.input, r.state, r.credit + ' c', r.remainingText, r.wash ? 'ON' : 'OFF']) {
+        const td = document.createElement('td'); td.textContent = v; tr.appendChild(td);
+      }
+      $('log').appendChild(tr);
+    }
+    return s;
+  }
+  function record(input) {
+    const s = m.snapshot(now >>> 0);
+    records.push({...s, now, input, remainingText: m.active() ? mmss(s.remaining) : '--:--'});
+    render();
+  }
+  function action(name, value=0) {
+    m.event(now >>> 0, name, value); record(name === 'COIN' ? 'COIN ' + value + ' c' : name);
+    return m.snapshot(now >>> 0);
+  }
+  function advance(ms) {
+    now += ms; m.step(now >>> 0); record('ADVANCE ' + mmss(ms)); return m.snapshot(now >>> 0);
+  }
+  function reset() { speed = 0; $('speed').value = '0'; now = 0; records = []; m.reset(0); record('RESET'); }
+  document.querySelectorAll('[data-coin]').forEach(b => b.addEventListener('click', () => action('COIN', Number(b.dataset.coin))));
+  document.querySelectorAll('[data-action]').forEach(b => b.addEventListener('click', () => action(b.dataset.action)));
+  document.querySelectorAll('[data-advance]').forEach(b => b.addEventListener('click', () => advance(Number(b.dataset.advance))));
+  $('fault').addEventListener('click', () => action('FAULT', 1)); $('reset').addEventListener('click', reset);
+  $('speed').addEventListener('change', () => { speed = Number($('speed').value); lastWall = performance.now(); });
+  $('download').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(records,null,2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob), a = document.createElement('a'); a.href=url; a.download='simulation_log.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url),1000);
+  });
+  setInterval(() => {
+    const wall=performance.now(), delta=wall-lastWall; lastWall=wall;
+    if (!speed) return;
+    const old=m.state; now += Math.round(delta * speed); m.step(now >>> 0);
+    if (m.state !== old) record('AUTO TIMEOUT'); else render();
+  }, 50);
+  window.demo = {action, advance, reset, snapshot:()=>m.snapshot(now >>> 0), log:()=>records};
+  reset();
+</script>
+</body>
+</html>

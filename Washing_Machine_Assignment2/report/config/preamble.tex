@@ -1,0 +1,36 @@
+\usepackage{fontspec}
+\IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{\setmainfont{Latin Modern Roman}}
+\IfFontExistsTF{TeX Gyre Heros}{\setsansfont{TeX Gyre Heros}}{\setsansfont{Latin Modern Sans}}
+\setmonofont{Latin Modern Mono}[Scale=0.88]
+\usepackage[margin=2.15cm,headheight=14pt]{geometry}
+\usepackage{graphicx,booktabs,tabularx,array,xcolor,amsmath}
+\usepackage{float,caption,enumitem,listings,fancyhdr,tikz}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue,
+  pdftitle={Assignment 2: Washing Machine Control Unit},
+  pdfauthor={Nguyen Viet Tan Vuong; Nguyen Le Cao Tuong; Vu Tien Vinh}}
+\definecolor{accent}{HTML}{2563A6}
+\definecolor{lightblue}{HTML}{EEF5FC}
+\definecolor{ink}{HTML}{183048}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\renewcommand{\arraystretch}{1.14}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlist{nosep,leftmargin=1.6em,topsep=3pt}
+\captionsetup{font=small,labelfont=bf,skip=5pt}
+\setlength{\intextsep}{7pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small CO3053 \quad Assignment 2}
+\fancyhead[R]{\small Washing Machine Control Unit}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\lstset{language=C++,basicstyle=\ttfamily\small,
+  keywordstyle=\color{accent},commentstyle=\color{gray},
+  frame=single,rulecolor=\color{gray!35},backgroundcolor=\color{gray!3},
+  columns=fullflexible,keepspaces=true,showstringspaces=false,
+  breaklines=true,aboveskip=8pt,belowskip=6pt,xleftmargin=5pt,xrightmargin=5pt}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\fig}[3]{\begin{figure}[H]\centering\includegraphics[width=#2\linewidth]{figures/#1}\caption{#3}\end{figure}}
+\emergencystretch=1.5em
+\raggedbottom

@@ -1,0 +1,35 @@
+\section{Implementation}
+\subsection{Proposed Board Connection}
+The example target is Arduino UNO R3. Its digital inputs and outputs are enough
+for this small control unit~\cite{uno}. Three extra switches emulate coin signals;
+they are test inputs, not extra machine controls. An optional fault switch
+provides the error signal.
+
+\begin{tabularx}{\linewidth}{@{}p{3.5cm}p{2.05cm}Y@{}}
+\toprule
+Signal & Pin & Connection\\
+\midrule
+STOP, RUN, PAUSE & D2, D3, D4 & Each switch connects its input to GND.\\
+10, 20, 50 cent test inputs & D5, D6, D7 & Each switch models one valid coin insertion.\\
+RLED & D8 & D8 to 330 $\Omega$ resistor, LED anode, then cathode to GND.\\
+BLED & D9 & D9 to 330 $\Omega$ resistor, LED anode, then cathode to GND.\\
+Wash enable & D10 & Digital enable for a separate driver; high only in Running.\\
+Fault test input & A0 & Switch to GND; LOW enters Error.\\
+Power and reference & USB, GND & USB supplies the board; all test inputs share GND.\\
+\bottomrule
+\end{tabularx}
+
+\fig{03_wiring_diagram.pdf}{1.0}{Proposed signal connections for the bench circuit.}
+
+All switch inputs use \code{INPUT\_PULLUP}. An open switch reads HIGH and a
+pressed switch reads LOW~\cite{pullup}. Each button must stay stable for 30 ms
+before a press is counted. Release is also debounced, so a held STOP cannot be
+mistaken for two presses.
+
+The bench parts are one UNO R3, two LEDs, two 330 $\Omega$ resistors, six push
+buttons, one optional fault switch, a breadboard, jumper wires and a USB cable.
+Coins can also be entered through Serial Monitor, so the three coin switches
+are optional for a simple demonstration.
+
+D10 represents the control decision. A motor requires a separate driver and
+power supply. No motor or mains circuit is needed to show the required state logic.

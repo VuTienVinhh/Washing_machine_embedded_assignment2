@@ -1,0 +1,46 @@
+\section{Team Work and Review Plan}
+\subsection{Proposed Work Split}
+The following split gives each member a clear output. Each person should explain
+their part and review one other part before submission.
+
+\begin{tabularx}{\linewidth}{@{}p{4.55cm}Y@{}}
+\toprule
+Member & Responsibility and output\\
+\midrule
+\studentA\newline\idA & Requirements, explicit assumptions, module diagram, state diagram and transition table. Review the code against the rules.\\
+\studentB\newline\idB & C++ controller, button debounce, board sketch and pin mapping. Review the simulator's timer, outputs and STOP behavior.\\
+\studentC\newline\idC & Browser demo, test evidence, report assembly and PDF checks. Review the state table and all submission files.\\
+\bottomrule
+\end{tabularx}
+
+\subsection{Schedule with Two Review Days}
+Use a seven day plan only if seven days are available; the brief supplied here
+does not give a deadline. Reserve the last two days for review.
+
+\begin{tabularx}{\linewidth}{@{}p{2.0cm}Y@{}}
+\toprule
+Period & Work and completion check\\
+\midrule
+Days 1 and 2 & Agree on requirements and state rules. Finish diagrams and a first working controller.\\
+Days 3 and 4 & Complete the sketch and simulator. Run coin, pause, timeout, STOP and error tests.\\
+Day 5 & Merge all files. Finish the report and freeze new features.\\
+Day 6 & Review each other's parts. Repeat failed tests and check any required board demonstration.\\
+Day 7 & Check names, IDs, figures, contents, source package and submission rules. Submit the final files.\\
+\bottomrule
+\end{tabularx}
+
+\vspace{6pt}
+The controller implements the coin threshold, timed cycle, pause and resume,
+two press stop and error indication. The reported results are software tests.
+A physical demonstration, if required separately, remains a group check.
+
+\vspace{2pt}
+\begingroup\small
+\renewcommand{\refname}{References}
+\begin{thebibliography}{9}
+\bibitem{brief} CO3053, \textit{Assignment 2: Washing Machine Control Unit}, provided assignment sheet, Lecture Notes slide 33.
+\bibitem{uno} Arduino, \textit{UNO R3}. \url{https://docs.arduino.cc/hardware/uno-rev3/}
+\bibitem{pullup} Arduino, \textit{INPUT, INPUT\_PULLUP, OUTPUT}. \url{https://docs.arduino.cc/language-reference/en/variables/constants/inputOutputPullup/}
+\bibitem{blink} Arduino, \textit{Blink Without Delay}. \url{https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/}
+\end{thebibliography}
+\endgroup

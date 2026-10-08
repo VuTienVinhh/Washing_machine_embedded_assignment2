@@ -1,0 +1,56 @@
+\subsection{Code Structure}
+The controller is written in C++. It does not call board functions, so the same
+code can be tested on a computer. The sketch only reads inputs, calls the
+controller and writes outputs. The browser model follows the same state rules.
+
+\begin{tabularx}{\linewidth}{@{}p{5.6cm}Y@{}}
+\toprule
+File & Purpose\\
+\midrule
+\code{controller.h} & States, credit, timer, STOP count, outputs and debounce.\\
+\code{washing\_controller.ino} & Pin setup, physical input reading and Serial test commands.\\
+\code{simulator/index.html} & Offline page with coins, buttons, LEDs, timer and event log.\\
+\code{simulator/controller.js} & Browser version of the state controller.\\
+\code{tests/test\_controller.py} & Compiles the C++ tests and checks expected results.\\
+\code{tests/test\_firmware.cpp} & Runs the actual sketch with mocked board inputs and outputs.\\
+\bottomrule
+\end{tabularx}
+
+\subsection{Important Code}
+The deadline is checked before control buttons. Both active states use the same
+start time. These lines are taken from the controller:
+\begin{lstlisting}
+if (active() && uint32_t(now - started_) >= CycleMs) {
+    finish(now);
+    return;
+}
+if (in.stop) {
+    ++stop_count_;
+    if (stop_count_ >= 2) finish(now);
+    return;
+}
+if (in.pause && state_ == State::Running) {
+    enter(State::Paused, now);
+} else if (in.run && state_ == State::Paused) {
+    // Keep started_: a pause never gives extra time.
+    enter(State::Running, now);
+}
+\end{lstlisting}
+The sketch reads \code{millis()} and uses unsigned subtraction for elapsed time.
+It updates the timer and LEDs without \code{delay()}, following the idea of
+Arduino's Blink Without Delay example~\cite{blink}. The tests also cover clock
+rollover and button bounce.
+
+\subsection{Running the Demonstration}
+Open \code{simulator/index.html} in a browser. Insert coins, press RUN, advance
+eight minutes and press PAUSE. Advance another eight minutes and press RUN.
+The display should show 14:00 remaining. Advance to minute 30 to verify timeout.
+Test two STOP presses in a new cycle, then inject a fault.
+
+The default clock is manual. Real time runs at 1x; demo time runs at 60x. Both
+use the same 30 minute virtual cycle. The browser can export the event log.
+
+For the board sketch, open \code{washing\_controller.ino} with its adjacent
+\code{controller.h}. Serial commands are \code{1}, \code{2}, \code{5} for coins
+and \code{r}, \code{p}, \code{s} for controls at 115200 baud. Verify and upload
+to the chosen board before using it in a physical demonstration.

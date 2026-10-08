@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "target": "arduino:avr:uno",
+  "core": "Arduino AVR Boards 1.8.6",
+  "cli": "1.5.2-rc.1",
+  "scope": "Target compile only. No board upload or physical test."
+}

@@ -1,0 +1,1868 @@
+[
+  {
+    "id": "T01",
+    "test": "Standby LEDs",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T02",
+    "test": "RUN with less than 50 cents",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        10,
+        "COIN",
+        10
+      ],
+      [
+        20,
+        "COIN",
+        20
+      ],
+      [
+        30,
+        "RUN",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 10,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 30,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 30,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T03",
+    "test": "Accumulate 20 + 20 + 10 cents",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        10,
+        "COIN",
+        20
+      ],
+      [
+        20,
+        "COIN",
+        20
+      ],
+      [
+        30,
+        "COIN",
+        10
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 20,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 40,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T04",
+    "test": "One 50 cent coin",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        1,
+        "COIN",
+        50
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T05",
+    "test": "Discard surplus when starting",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        1,
+        "COIN",
+        20
+      ],
+      [
+        2,
+        "COIN",
+        50
+      ],
+      [
+        3,
+        "RUN",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 20,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 70,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      }
+    ]
+  },
+  {
+    "id": "T06",
+    "test": "Reject unsupported 25 cent coin",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        1,
+        "COIN",
+        25
+      ],
+      [
+        2,
+        "RUN",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T07",
+    "test": "Ignore coins during active cycle",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        1,
+        "COIN",
+        50
+      ],
+      [
+        2,
+        "RUN",
+        0
+      ],
+      [
+        3,
+        "COIN",
+        50
+      ],
+      [
+        4,
+        "PAUSE",
+        0
+      ],
+      [
+        5,
+        "COIN",
+        20
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799999,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1799998,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1799997,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T08",
+    "test": "Blue LED blinks every 500 ms",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        499,
+        "TICK",
+        0
+      ],
+      [
+        500,
+        "TICK",
+        0
+      ],
+      [
+        1000,
+        "TICK",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799501,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799500,
+        "stops": 0,
+        "red": false,
+        "blue": false,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      }
+    ]
+  },
+  {
+    "id": "T09",
+    "test": "PAUSE keeps timer counting",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        480000,
+        "PAUSE",
+        0
+      ],
+      [
+        960000,
+        "TICK",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1320000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 840000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T10",
+    "test": "Resume retains original deadline",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        480000,
+        "PAUSE",
+        0
+      ],
+      [
+        960000,
+        "RUN",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1320000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 840000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      }
+    ]
+  },
+  {
+    "id": "T11",
+    "test": "Running cycle ends exactly at 30 min",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1799999,
+        "TICK",
+        0
+      ],
+      [
+        1800000,
+        "TICK",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1,
+        "stops": 0,
+        "red": false,
+        "blue": false,
+        "wash": true
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T12",
+    "test": "Paused cycle also ends at 30 min",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1000,
+        "PAUSE",
+        0
+      ],
+      [
+        1800000,
+        "TICK",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1799000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T13",
+    "test": "Two STOP presses force stop",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1000,
+        "STOP",
+        0
+      ],
+      [
+        2000,
+        "STOP",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799000,
+        "stops": 1,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T14",
+    "test": "Two STOP presses while paused",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1000,
+        "PAUSE",
+        0
+      ],
+      [
+        2000,
+        "STOP",
+        0
+      ],
+      [
+        3000,
+        "STOP",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1799000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1798000,
+        "stops": 1,
+        "red": false,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T15",
+    "test": "STOP count survives pause and resume",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1000,
+        "STOP",
+        0
+      ],
+      [
+        2000,
+        "PAUSE",
+        0
+      ],
+      [
+        3000,
+        "RUN",
+        0
+      ],
+      [
+        60000,
+        "STOP",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799000,
+        "stops": 1,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1798000,
+        "stops": 1,
+        "red": false,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1797000,
+        "stops": 1,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T16",
+    "test": "New cycle clears STOP count",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1,
+        "STOP",
+        0
+      ],
+      [
+        2,
+        "STOP",
+        0
+      ],
+      [
+        3,
+        "COIN",
+        50
+      ],
+      [
+        4,
+        "RUN",
+        0
+      ],
+      [
+        5,
+        "STOP",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799999,
+        "stops": 1,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799999,
+        "stops": 1,
+        "red": false,
+        "blue": true,
+        "wash": true
+      }
+    ]
+  },
+  {
+    "id": "T17",
+    "test": "Fault stops washing and blinks red",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1000,
+        "FAULT",
+        1
+      ],
+      [
+        1500,
+        "TICK",
+        0
+      ],
+      [
+        2000,
+        "TICK",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": false,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T18",
+    "test": "Error is latched until board reset",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        1,
+        "FAULT",
+        1
+      ],
+      [
+        2,
+        "FAULT",
+        0
+      ],
+      [
+        3,
+        "COIN",
+        50
+      ],
+      [
+        4,
+        "RUN",
+        0
+      ],
+      [
+        5,
+        "STOP",
+        0
+      ],
+      [
+        6,
+        "STOP",
+        0
+      ],
+      [
+        7,
+        "RESET",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T19",
+    "test": "Repeated RUN cannot restart timer",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        900000,
+        "RUN",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 900000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      }
+    ]
+  },
+  {
+    "id": "T20",
+    "test": "Unsigned timer survives clock rollover",
+    "events": [
+      [
+        4294967040,
+        "RESET",
+        0
+      ],
+      [
+        4294967040,
+        "COIN",
+        50
+      ],
+      [
+        4294967040,
+        "RUN",
+        0
+      ],
+      [
+        4294968040,
+        "TICK",
+        0
+      ],
+      [
+        4296767040,
+        "TICK",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T21",
+    "test": "Fault has priority over commands",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1000,
+        "BOTH",
+        15
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "ERROR",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T22",
+    "test": "Timeout has priority over resume",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1000,
+        "PAUSE",
+        0
+      ],
+      [
+        1800000,
+        "RUN",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1799000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T23",
+    "test": "PAUSE has priority over RUN",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1000,
+        "BOTH",
+        3
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "PAUSED",
+        "credit": 0,
+        "remaining": 1799000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": false
+      }
+    ]
+  },
+  {
+    "id": "T24",
+    "test": "STOP has priority over PAUSE",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        0,
+        "COIN",
+        50
+      ],
+      [
+        0,
+        "RUN",
+        0
+      ],
+      [
+        1000,
+        "BOTH",
+        6
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "READY",
+        "credit": 50,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": true,
+        "wash": false
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1800000,
+        "stops": 0,
+        "red": false,
+        "blue": true,
+        "wash": true
+      },
+      {
+        "state": "RUNNING",
+        "credit": 0,
+        "remaining": 1799000,
+        "stops": 1,
+        "red": false,
+        "blue": true,
+        "wash": true
+      }
+    ]
+  },
+  {
+    "id": "T25",
+    "test": "Unused buttons in standby do nothing",
+    "events": [
+      [
+        0,
+        "RESET",
+        0
+      ],
+      [
+        1,
+        "STOP",
+        0
+      ],
+      [
+        2,
+        "PAUSE",
+        0
+      ]
+    ],
+    "results": [
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      },
+      {
+        "state": "STANDBY",
+        "credit": 0,
+        "remaining": 0,
+        "stops": 0,
+        "red": true,
+        "blue": false,
+        "wash": false
+      }
+    ]
+  }
+]
