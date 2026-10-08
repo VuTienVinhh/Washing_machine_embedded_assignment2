@@ -1,56 +1,59 @@
-\subsection{Code Structure}
-The controller is written in C++. It does not call board functions, so the same
-code can be tested on a computer. The sketch only reads inputs, calls the
-controller and writes outputs. The browser model follows the same state rules.
+\subsection{Software and GitHub Review Guide}\label{sec:reviewer-guide}
+The C++ controller handles states, credit, the timer and outputs. The sketch
+reads pins and writes outputs. The browser model follows the same state rules.
+The timer uses \code{millis()} without \code{delay()}~\cite{blink}.
 
-\begin{tabularx}{\linewidth}{@{}p{5.6cm}Y@{}}
+\textbf{Repository:} \href{https://github.com/VuTienVinhh/Washing_machine_embedded_assignment2}{VuTienVinhh/Washing\_machine\_embedded\_assignment2}\par
+\textbf{Start folder:} \href{https://github.com/VuTienVinhh/Washing_machine_embedded_assignment2/tree/main/Washing_Machine_Assignment2}{\code{Washing\_Machine\_Assignment2/}}.
+All paths below are inside this folder. Folder names in the table are clickable.
+
+{\small
+\begin{tabularx}{\linewidth}{@{}p{4.7cm}Y@{}}
 \toprule
-File & Purpose\\
+Folder & What to open or check\\
 \midrule
-\code{controller.h} & States, credit, timer, STOP count, outputs and debounce.\\
-\code{washing\_controller.ino} & Pin setup, physical input reading and Serial test commands.\\
-\code{simulator/index.html} & Offline page with coins, buttons, LEDs, timer and event log.\\
-\code{simulator/controller.js} & Browser version of the state controller.\\
-\code{tests/test\_controller.py} & Compiles the C++ tests and checks expected results.\\
-\code{tests/test\_firmware.cpp} & Runs the actual sketch with mocked board inputs and outputs.\\
+\href{https://github.com/VuTienVinhh/Washing_machine_embedded_assignment2/tree/main/Washing_Machine_Assignment2/output}{\nolinkurl{output/}} & \code{Washing\_Machine\_Simulator.html}: offline demo.\\
+\href{https://github.com/VuTienVinhh/Washing_machine_embedded_assignment2/tree/main/Washing_Machine_Assignment2/firmware/washing_controller}{\nolinkurl{firmware/washing_controller/}} & \code{controller.h}: control logic; \code{washing\_controller.ino}: board inputs and outputs.\\
+\href{https://github.com/VuTienVinhh/Washing_machine_embedded_assignment2/tree/main/Washing_Machine_Assignment2/simulator}{\nolinkurl{simulator/}} & \code{index.html} and \code{controller.js}: editable browser model.\\
+\href{https://github.com/VuTienVinhh/Washing_machine_embedded_assignment2/tree/main/Washing_Machine_Assignment2/tests}{\nolinkurl{tests/}} & \code{test\_controller.py}: test entry point.\\
+\href{https://github.com/VuTienVinhh/Washing_machine_embedded_assignment2/tree/main/Washing_Machine_Assignment2/evidence}{\nolinkurl{evidence/}} & \code{test\_results.csv}, \code{test\_console.txt}, \code{arduino\_compile.txt} and demo images.\\
+\href{https://github.com/VuTienVinhh/Washing_machine_embedded_assignment2/tree/main/Washing_Machine_Assignment2/report}{\nolinkurl{report/}} & \code{main.tex}, \code{sections/} and \code{figures/}: report source and diagrams.\\
 \bottomrule
-\end{tabularx}
+\end{tabularx}}
 
-\subsection{Important Code}
-The deadline is checked before control buttons. Both active states use the same
-start time. These lines are taken from the controller:
-\begin{lstlisting}
-if (active() && uint32_t(now - started_) >= CycleMs) {
-    finish(now);
-    return;
-}
-if (in.stop) {
-    ++stop_count_;
-    if (stop_count_ >= 2) finish(now);
-    return;
-}
-if (in.pause && state_ == State::Running) {
-    enter(State::Paused, now);
-} else if (in.run && state_ == State::Paused) {
-    // Keep started_: a pause never gives extra time.
-    enter(State::Running, now);
-}
+\subsection{Download and Run the Demo}
+\begin{enumerate}
+\item Open the repository link. Click \textbf{Code}, then \textbf{Download ZIP}.
+Extract the ZIP and enter \code{Washing\_Machine\_Assignment2/}.
+\item Open \code{output/}, then double click
+\code{Washing\_Machine\_Simulator.html} to open it in Chrome, Edge or Firefox.
+After downloading, the demo needs no Internet or installation.
+\item Click \textbf{Reset bench}. Insert 20 cent and 50 cent. The state should
+be Ready with 70 cent. Press RUN: Running, credit 0, timer 30:00.
+\item In \textbf{Manual time} mode, advance 8 minutes using \textbf{+5 minutes} once and
+\textbf{+1 minute} three times. Press PAUSE: 22:00 remains and wash is OFF.
+Advance another 8 minutes, then press RUN: 14:00 remains.
+\item Advance 14 minutes: the state returns to Standby. Start a new paid
+cycle and press STOP twice. The first press keeps it running; the second ends it.
+Start another cycle and click \textbf{Inject fault}: Error and wash OFF.
+\end{enumerate}
+Manual mode changes time only when a time button is clicked. Select
+\textbf{Real time (1x)} to observe LED blinking. \textbf{Download log} exports
+the events. GitHub displays HTML source; download it before running the demo.
+
+\subsection{Repeat Tests or Open the Board Sketch}
+For tests, install Python 3, Node.js and \code{g++}. Open a terminal inside
+\code{Washing\_Machine\_Assignment2/} and run:
+\begin{lstlisting}[language={},aboveskip=3pt,belowskip=3pt]
+python3 tests/test_controller.py
 \end{lstlisting}
-The sketch reads \code{millis()} and uses unsigned subtraction for elapsed time.
-It updates the timer and LEDs without \code{delay()}, following the idea of
-Arduino's Blink Without Delay example~\cite{blink}. The tests also cover clock
-rollover and button bounce.
+The script checks the C++ logic, sketch adapter and browser model. In
+\code{evidence/}, open \code{test\_console.txt} for the summary and
+\code{test\_results.csv} for expected and actual values.
 
-\subsection{Running the Demonstration}
-Open \code{simulator/index.html} in a browser. Insert coins, press RUN, advance
-eight minutes and press PAUSE. Advance another eight minutes and press RUN.
-The display should show 14:00 remaining. Advance to minute 30 to verify timeout.
-Test two STOP presses in a new cycle, then inject a fault.
-
-The default clock is manual. Real time runs at 1x; demo time runs at 60x. Both
-use the same 30 minute virtual cycle. The browser can export the event log.
-
-For the board sketch, open \code{washing\_controller.ino} with its adjacent
-\code{controller.h}. Serial commands are \code{1}, \code{2}, \code{5} for coins
-and \code{r}, \code{p}, \code{s} for controls at 115200 baud. Verify and upload
-to the chosen board before using it in a physical demonstration.
+For an optional board check, open
+\nolinkurl{firmware/washing_controller/washing_controller.ino} in Arduino IDE,
+keeping \code{controller.h} beside it. Select Arduino UNO, Verify, then Upload
+to a connected board. Serial Monitor uses 115200 baud: \code{1}, \code{2},
+\code{5} insert coins; \code{r}, \code{p}, \code{s} control RUN, PAUSE, STOP.
+The submitted evidence covers software tests and board compilation.

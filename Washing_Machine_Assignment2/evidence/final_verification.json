@@ -26,5 +26,25 @@
     "cli": "1.5.2-rc.1",
     "scope": "Target compile only. No board upload or physical test."
   },
-  "physical_hardware": "Not tested"
+  "physical_hardware": "Not tested",
+  "github_review_guide": {
+    "status": "PASS",
+    "repository": "https://github.com/VuTienVinhh/Washing_machine_embedded_assignment2",
+    "branch": "main",
+    "project_folder": "Washing_Machine_Assignment2",
+    "repository_structure_checked": "2026-10-08",
+    "guide_physical_pages": [
+      2,
+      7
+    ],
+    "guide_sections": [
+      "3.2",
+      "3.3",
+      "3.4"
+    ],
+    "github_link_annotations": 9,
+    "report_pages": 10,
+    "layout": "Updated pages rendered and visually checked; no overfull boxes.",
+    "scope": "Documentation update; controller, simulator and test code unchanged."
+  }
 }
